@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Socket } from 'ngx-socket-io';
 @Component({
   selector: 'app-page-join-game',
   templateUrl: './page-join-game.component.html',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageJoinGameComponent implements OnInit {
 
-  constructor() { }
+  constructor(private socket: Socket) { }
 
   ngOnInit(): void {
+  }
+  name: string = ''
+  joinRoom(room: string) {
+    this.socket.emit('join-room', room)
+
   }
 
 }

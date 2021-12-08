@@ -23,7 +23,7 @@ const server = http.createServer(app);
 const clientPath = path.join(__dirname, '/dist/client');
 app.use(express.static(clientPath));
 
-const io = new socketIO.Server(server,  { cors: {
+export const io = new socketIO.Server(server,  { cors: {
   origin: '*'
 }});
 
@@ -58,11 +58,18 @@ server.listen(PORT, function () {
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  socket.emit('message', 'work')
+  socket.emit('message', 'work');
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
+
+  socket.on('join-room', room => {
+    socket.join(room)
+    console.log("hello welcome to", room)
+  })
 });
+
+
 
 app.all("*", function (req, res) {
   const filePath = path.join(__dirname, '/dist/client/index.html');
