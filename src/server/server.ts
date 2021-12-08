@@ -65,6 +65,7 @@ io.on('connection', function(socket){
 
   socket.on('join-room', room => {
     socket.join(room)
+    io.to(room).emit('howdy howdy')
     console.log("hello welcome to", room)
   })
 });
@@ -73,6 +74,6 @@ io.on('connection', function(socket){
 
 app.all("*", function (req, res) {
   const filePath = path.join(__dirname, '/dist/client/index.html');
-  console.log(filePath);
+
   res.sendFile(filePath);
 });
