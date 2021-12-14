@@ -1,4 +1,9 @@
-<div>
+<div class="Competitors">
+  <h1>Players:</h1>
+  <li>---:0</li>
+  <li>{{username}}: 0</li>
+</div>
+<div class="main">
 <svg >
   <defs>
     <g id="cube" class="cube-unit">
@@ -12,8 +17,30 @@
   <svg viewBox="0 0 40 50" width="350" height="330">
     <use href="#cube" x="0" y="13"/>
     </svg>
-    <button>ARE YOU READY</button>
+    <p-button class="ready-button">ARE YOU READY</p-button>
     <svg class="bottom" viewBox="0 0 40 50" width="350" height="330">
       <use href="#cube" x="0" y="13"/>
       </svg>
   </div>
+
+  <div class="lefty">
+    <div>
+      <ul *ngFor="let message of messageList">
+        <li>
+          {{message}}
+        </li>
+      </ul>
+    </div>
+    <p-dialog class="dia" header="Let's get started. What's your name?" [(visible)]="display" [modal]="true" [style]="{width: '30vw'}"
+    [draggable]="false" [resizable]="false" closeIcon="none">
+      <input type="text" pInputText class="dialogInput" placeholder="Username"
+      [(ngModel)]="username">
+      <p-button label="Submit" icon="pi pi-check" iconPos="right" (click)="showDialog()"></p-button>
+  </p-dialog>
+
+      <input [(ngModel)]="newMessage" type="text" id="input">
+      <button (click)="sendMessage()">SEND</button>
+
+  </div>
+
+
