@@ -1,21 +1,33 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import {map, shareReplay, tap} from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketioService {
   public indexes$!: Observable<any>;
+  public message$: BehaviorSubject<string> = new BehaviorSubject('')
   constructor(private socket: Socket) {
   }
 
-  sendMessage(msg: string) {
-    this.socket.emit('message', msg);
+  sendMessage(message: string) {
+    this.socket.emit('message', message);
   }
+  getNewMessage = () => {
+    this.socket.on('message', (message: string) => {
+      this.message$.next(message)
+    });
+
+    return this.message$.asObservable()
+  }
+
   getMessage() {
-    return this.socket.fromEvent('message').pipe(map((data:any) => data));
+    console.log(this.socket);
+    return this.socket.fromEvent('message').pipe(tap((data:any) => console.log(data)));
   }
+
 
 }

@@ -50,24 +50,45 @@ app.all("/api/*", function (req, res) {
   res.sendStatus(404);
 });
 
-
+let numClients = 0;
 server.listen(PORT, function () {
   console.log(`starting at localhost http://localhost:${PORT}`);
 });
 
-
 io.on('connection', function(socket){
   console.log('a user connected');
-  socket.emit('message', 'work');
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
 
   socket.on('join-room', room => {
-    socket.join(room)
-    io.to(room).emit('howdy howdy')
-    console.log("hello welcome to", room)
+    // if(numClients == 0 ) {
+    //   numClients++
+      socket.join(room);
+    //   console.log('welcome to ', room)
+    // } else if (numClients == 1){
+    //   numClients++
+    //   socket.join(room)
+      console.log('welcome to ', room)
+    // }
+    //   else  {
+    //   console.log(room, ' is full')
+    // }
+    // console.log(`there are ${numClients} players`)
+  
+    socket.on('message', (message: string) => {
+      io.to(room).emit('message', message)
+      console.log(`${room}: ${message}`)
+    })
+   
   })
+
+  // socket.on('message', (message) => {
+  //   io.emit('message', message);
+  //   console.log(message);
+  // })
+
+
 });
 
 
