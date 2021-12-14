@@ -1,4 +1,4 @@
-div {
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,5 +11,42 @@ button {
 .bottom {
   margin: 100px;
 }
+.lefty {
+  float: left;
+  border: 2px solid black;
+}
 
+:host ::ng-deep .p-button {
+  margin: 0 .5rem 0 0;
+  min-width: 10rem;
+}
 
+p {
+  margin: 0;
+}
+
+.confirmation-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host ::ng-deep .p-dialog .p-button {
+  min-width: 6rem;
+}
+
+.dialogInput {
+  width: 300px;
+}
+
+.Competitors {
+  float: left
+}
+
+.ready-button {
+  padding-top: 60px;
+}
+
+p-dialog-titlebar-close {
+  background-color: red;
+}
