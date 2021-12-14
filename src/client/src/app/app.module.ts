@@ -19,7 +19,10 @@ import { PageLoginComponent } from './pages/page-login/page-login.component';
 import { PageJoinGameComponent } from './pages/page-join-game/page-join-game.component';
 import { PageCreateGameComponent } from './pages/page-create-game/page-create-game.component';
 import { GamePageComponent } from './pages/game-page/game-page.component';
-
+import { DialogModule } from 'primeng/dialog'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button'
 const config: SocketIoConfig = { url: !environment.production ? 'http://localhost:3000/' : '', options: {} };
 
 @NgModule({
@@ -44,6 +47,10 @@ const config: SocketIoConfig = { url: !environment.production ? 'http://localhos
     StoreModule.forFeature(fromUser.userFeatureKey, fromUser.reducer),
     EffectsModule.forRoot([UserEffects]),
     SocketIoModule.forRoot(config),
+    DialogModule,
+    BrowserAnimationsModule,
+    InputTextModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
