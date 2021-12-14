@@ -13,7 +13,5 @@ export class AppComponent {
   constructor(private socketService: SocketioService, public api: ApiService) {}
 
   ngOnInit() {
-    this.api.get('test').subscribe(res => console.log(res))
-    this.socketService.getMessage().subscribe(message => { console.log(message); });
   }
 }
